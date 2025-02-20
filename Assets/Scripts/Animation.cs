@@ -19,6 +19,7 @@ public class Animation : MonoBehaviour
         bool moveInput = Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0;
 
         // 이동 상태가 변경되었는지 확인
+
         if (moveInput != isMoving)
         {
             isMoving = moveInput; // 상태 업데이트
