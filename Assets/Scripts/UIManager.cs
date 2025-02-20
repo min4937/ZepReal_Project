@@ -11,15 +11,12 @@ public class UIManager : MonoBehaviour
     public Button[] buttons;
     public TextMeshProUGUI bestScoreText;
 
-    public TextMeshProUGUI passText;
-    public TextMeshProUGUI failText;
 
-    private void Start()
-    {
-        // 초기에는 텍스트 비활성화
-        if (passText != null) passText.gameObject.SetActive(false);
-        if (failText != null) failText.gameObject.SetActive(false);
-    }
+       
+
+    GameManager gameManager;
+       
+        
     public void DisplayRanking(int bestScore)
     {
         bestScoreText.text = bestScore.ToString();
@@ -32,21 +29,9 @@ public class UIManager : MonoBehaviour
         {
             button.gameObject.SetActive(true);
         }
-        DisplayResult();
+        
     }
-    void DisplayResult()
-    {
-        if (GameManager.Instance.currentScore >= 20)
-        {
-            if (passText != null) passText.gameObject.SetActive(true);
-            if (failText != null) failText.gameObject.SetActive(false);
-        }
-        else
-        {
-            if (passText != null) passText.gameObject.SetActive(false);
-            if (failText != null) failText.gameObject.SetActive(true);
-        }
-    }
+   
 
 
     public void UpdateScore(int score)

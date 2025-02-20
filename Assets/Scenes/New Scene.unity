@@ -1757,6 +1757,7 @@ GameObject:
   - component: {fileID: 1234751323}
   - component: {fileID: 1234751322}
   - component: {fileID: 1234751321}
+  - component: {fileID: 1234751326}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1779,8 +1780,6 @@ MonoBehaviour:
   scoreText: {fileID: 0}
   buttons: []
   bestScoreText: {fileID: 0}
-  passText: {fileID: 1923514102}
-  failText: {fileID: 2062446673}
 --- !u!114 &1234751322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1865,6 +1864,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1234751326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1234751320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e76b91c2906c2d42a780a55ba4c8d28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passText: {fileID: 0}
+  falseText: {fileID: 0}
 --- !u!1 &1391755124
 GameObject:
   m_ObjectHideFlags: 0
