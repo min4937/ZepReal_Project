@@ -3,66 +3,67 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
-
-public class GameManager : MonoBehaviour
+public class MiniGameManager : MonoBehaviour
 {
-    static GameManager gameManager;
+    static MiniGameManager gameManager;
 
-    public static GameManager Instance
-    {
-        get { return gameManager; }
-    }
+    public static MiniGameManager Instance => gameManager;
 
     public int currentScore = 0;
-    UIManager uiManager;
+    MiniGameUIManager uiManager;
 
-    public UIManager UIManager
+    public MiniGameUIManager UIManager
     {
         get { return uiManager; }
     }
     private void Awake()
     {
         gameManager = this;
-        uiManager = FindObjectOfType<UIManager>();
+        uiManager = FindObjectOfType<MiniGameUIManager>();
     }
 
     private void Start()
     {
-        uiManager.UpdateScore(0);
+        if (UIManager != null)
+        {
+            UIManager.UpdateScore(0);
+        }
     }
 
     public void GameOver()
     {
         Debug.Log("Game Over");
-        uiManager.GameOver();
+        if (UIManager != null)
+        {
+            UIManager.GameOver();
+        }
+
         if (PlayerPrefs.HasKey("BestScore"))
-        {            
+        {
             var oldScore = PlayerPrefs.GetInt("BestScore");
-            if(oldScore < currentScore)
+            if (oldScore < currentScore)
             {
                 PlayerPrefs.SetInt("BestScore", currentScore);
             }
-            
         }
         else
         {
             PlayerPrefs.SetInt("BestScore", currentScore);
         }
 
-        uiManager.DisplayRanking(PlayerPrefs.GetInt("BestScore"));
+        if (UIManager != null)
+        {
+            UIManager.DisplayRanking(PlayerPrefs.GetInt("BestScore"));
+        }
     }
-
-    
 
     public void AddScore(int score)
     {
         currentScore += score;
-        uiManager.UpdateScore(currentScore);
+        if (UIManager != null)
+        {
+            UIManager.UpdateScore(currentScore);
+        }
         Debug.Log("Score: " + currentScore);
     }
-
 }
-
-
-

@@ -4,19 +4,14 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-public class UIManager : MonoBehaviour
+public class MiniGameUIManager : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
     public Button[] buttons;
     public TextMeshProUGUI bestScoreText;
 
+    MiniGameManager gameManager;
 
-       
-
-    GameManager gameManager;
-       
-        
     public void DisplayRanking(int bestScore)
     {
         bestScoreText.text = bestScore.ToString();
@@ -29,14 +24,10 @@ public class UIManager : MonoBehaviour
         {
             button.gameObject.SetActive(true);
         }
-        
     }
-   
-
 
     public void UpdateScore(int score)
     {
         scoreText.text = score.ToString();
     }
 }
-

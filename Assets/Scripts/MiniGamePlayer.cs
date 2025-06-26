@@ -2,9 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
-public class Player : MonoBehaviour
+public class MiniGamePlayer : MonoBehaviour
 {
     Animator animator = null;
     Rigidbody2D _rigidbody = null;
@@ -16,13 +14,13 @@ public class Player : MonoBehaviour
 
     bool isFlap = false;
 
-    
-
-    GameManager gameManager;
+    MiniGameManager gameManager;
 
     void Start()
     {
-        gameManager = GameManager.Instance;
+        // 여기를 수정했습니다.
+        gameManager = MiniGameManager.Instance;
+
         animator = transform.GetComponentInChildren<Animator>();
         _rigidbody = transform.GetComponent<Rigidbody2D>();
 
@@ -45,7 +43,6 @@ public class Player : MonoBehaviour
             {
                 deathCooldown -= Time.deltaTime;
             }
-            
         }
         else
         {
@@ -66,20 +63,18 @@ public class Player : MonoBehaviour
 
         if (isFlap)
         {
-            velocity.y += flapForce;
+            velocity.y = flapForce;
             isFlap = false;
         }
 
         _rigidbody.velocity = velocity;
 
-        float angle = Mathf.Clamp((_rigidbody.velocity.y * 10f), -180, 180);
-        float lerpAngle = Mathf.Lerp(_rigidbody.velocity.y, angle, Time.deltaTime * 5f);
-        transform.rotation = Quaternion.Euler(0, 0, lerpAngle);
+        float angle = Mathf.Clamp((_rigidbody.velocity.y * 10f), -90, 90);
+        transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        
         if (isDead)
             return;
 
@@ -90,4 +85,3 @@ public class Player : MonoBehaviour
         gameManager.GameOver();
     }
 }
-

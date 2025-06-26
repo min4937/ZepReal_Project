@@ -3,30 +3,46 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour, PlayerInputControls.IPlayerActions
+public class TestInputPlayer : MonoBehaviour, PlayerInputControls.IPlayerActions
 {
-    private PlayerInputControls input;
-    private Rigidbody2D rigid;
-    [SerializeField]    
-    private float moveSpeed;
+    private PlayerInputControls inputControls;
+    Rigidbody2D rigidbody2;
+    private Vector2 moveDirection;
+    public float MoveSpeed;
 
+    void Awake()
+    {
+        inputControls = new PlayerInputControls();
+        rigidbody2 = GetComponent<Rigidbody2D>();
+    }
+
+    void OnEnable()
+    {
+        inputControls.Player.SetCallbacks(this);
+        inputControls.Enable();
+    }
+
+    void OnDisable()
+    {
+        inputControls.Disable();
+    }
+
+    void FixedUpdate()
+    {
+        rigidbody2.velocity = moveDirection * MoveSpeed;
+    }
     public void OnMove(InputAction.CallbackContext context)
     {
-        rigid.velocity = context.ReadValue<Vector2>() * moveSpeed;
+        moveDirection = context.ReadValue<Vector2>();
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void OnLook(InputAction.CallbackContext context)
     {
-        input = new();
-        input.Player.SetCallbacks(this);
-        input.Enable();        
-        rigid = GetComponent<Rigidbody2D>();
+        throw new System.NotImplementedException();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnFire(InputAction.CallbackContext context)
     {
-        
+        throw new System.NotImplementedException();
     }
 }

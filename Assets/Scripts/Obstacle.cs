@@ -1,11 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
-using Random = UnityEngine.Random;
-
-
-
 
 public class Obstacle : MonoBehaviour
 {
@@ -20,11 +15,11 @@ public class Obstacle : MonoBehaviour
 
     public float widthPadding = 4f;
 
-    GameManager gameManager;
+    MiniGameManager gameManager;
 
     private void Start()
     {
-        gameManager = GameManager.Instance;
+        gameManager = MiniGameManager.Instance;
     }
 
     public Vector3 SetRandomPlace(Vector3 lastPosition, int obstacleCount)
@@ -44,13 +39,10 @@ public class Obstacle : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Player player = collision.GetComponent<Player>();
-        if(player != null)
+        MiniGamePlayer player = collision.GetComponent<MiniGamePlayer>();
+        if (player != null)
         {
             gameManager.AddScore(1);
         }
     }
-
 }
-   
-

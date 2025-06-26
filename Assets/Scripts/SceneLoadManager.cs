@@ -18,10 +18,10 @@ public class SceneLoadManager : MonoBehaviour
     {
         sceneManager = this;
     }
-    
-    public void LoadScene(SceneAsset sceneAsset)
+
+    public void LoadScene(string sceneName)
     {
-        SceneManager.LoadSceneAsync(sceneAsset.name);
+        SceneManager.LoadSceneAsync(sceneName);
     }
-   
+
 }
